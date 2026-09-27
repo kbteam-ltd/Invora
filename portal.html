@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Your account · Invora</title>
+    <link rel="icon" href="assets/icon.png" />
+    <style>
+      :root {
+        --navy: #112844;
+        --cream: #f4efe4;
+        --border: #e7e2d5;
+        --muted: #63707f;
+        --indigo: #2a5381;
+        --green: #10b981;
+        --greenBg: #e7f8f1;
+        --amber: #b7791f;
+        --amberBg: #fdf3e1;
+        --red: #c2410c;
+        --redBg: #fdece4;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          sans-serif;
+        background: #efeae0;
+        color: var(--navy);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        background: rgba(244, 239, 228, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+      }
+      .bar {
+        max-width: 880px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 16px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        font-size: 17px;
+        letter-spacing: -0.02em;
+      }
+      .brand img {
+        width: 26px;
+        height: 26px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 9px 14px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 14px;
+        text-decoration: none;
+        border: 1px solid var(--border);
+        background: #fff;
+        color: var(--navy);
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .btn.primary {
+        background: var(--navy);
+        color: #fff;
+        border-color: var(--navy);
+      }
+      .btn.pay {
+        background: var(--green);
+        border-color: var(--green);
+        color: #fff;
+      }
+      main {
+        flex: 1;
+        width: 100%;
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 22px 16px 48px;
+      }
+      .hello {
+        margin-bottom: 18px;
+      }
+      .hello .from {
+        font-size: 13px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 700;
+      }
+      .hello h1 {
+        font-size: 26px;
+        letter-spacing: -0.02em;
+        margin-top: 4px;
+      }
+      .hello p {
+        color: var(--muted);
+        margin-top: 6px;
+        font-size: 14px;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 14px 16px;
+      }
+      .card .k {
+        font-size: 12px;
+        color: var(--muted);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .card .v {
+        font-size: 22px;
+        font-weight: 800;
+        margin-top: 6px;
+        letter-spacing: -0.02em;
+      }
+      .card .s {
+        font-size: 12.5px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+      .card.due .v {
+        color: var(--navy);
+      }
+      .card.over .v {
+        color: var(--red);
+      }
+      .payrow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 14px 16px;
+        margin-bottom: 18px;
+      }
+      .payrow p {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .payrow b {
+        color: var(--navy);
+      }
+      h2 {
+        font-size: 15px;
+        margin: 6px 2px 10px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .filters {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+      }
+      .chip {
+        border: 1px solid var(--border);
+        background: #fff;
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        color: var(--navy);
+      }
+      .chip.on {
+        background: var(--navy);
+        color: #fff;
+        border-color: var(--navy);
+      }
+      .list {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 6px 12px;
+        padding: 14px 16px;
+        border-top: 1px solid var(--border);
+        align-items: center;
+      }
+      .row:first-child {
+        border-top: 0;
+      }
+      .num {
+        font-weight: 700;
+      }
+      .meta {
+        font-size: 12.5px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+      .amt {
+        text-align: right;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+      }
+      .amt small {
+        display: block;
+        font-weight: 500;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .badge {
+        display: inline-block;
+        font-size: 11.5px;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 999px;
+        margin-left: 8px;
+        vertical-align: 1px;
+      }
+      .b-paid {
+        background: var(--greenBg);
+        color: #047857;
+      }
+      .b-due {
+        background: #eaf0f8;
+        color: var(--indigo);
+      }
+      .b-part {
+        background: var(--amberBg);
+        color: var(--amber);
+      }
+      .b-over {
+        background: var(--redBg);
+        color: var(--red);
+      }
+      .acts {
+        grid-column: 1/-1;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .acts .btn {
+        padding: 7px 12px;
+        font-size: 13px;
+      }
+      .empty {
+        padding: 28px 16px;
+        text-align: center;
+        color: var(--muted);
+      }
+      .state {
+        margin: 70px auto;
+        text-align: center;
+        color: var(--muted);
+        max-width: 420px;
+        line-height: 1.5;
+        padding: 0 16px;
+      }
+      .state h1 {
+        font-size: 20px;
+        color: var(--navy);
+        margin-bottom: 8px;
+      }
+      .spin {
+        width: 28px;
+        height: 28px;
+        border: 3px solid var(--border);
+        border-top-color: var(--indigo);
+        border-radius: 50%;
+        animation: s 0.8s linear infinite;
+        margin: 0 auto 14px;
+      }
+      @keyframes s {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .contact {
+        margin-top: 18px;
+        font-size: 13.5px;
+        color: var(--muted);
+        text-align: center;
+      }
+      .contact a {
+        color: var(--indigo);
+        font-weight: 600;
+        text-decoration: none;
+      }
+      footer {
+        text-align: center;
+        padding: 16px;
+        font-size: 12.5px;
+        color: var(--muted);
+      }
+      footer a {
+        color: var(--indigo);
+        text-decoration: none;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="bar">
+        <div class="brand"><img src="assets/logo.svg" alt="" />Invora</div>
+        <span
+          id="updated"
+          style="font-size: 12.5px; color: var(--muted)"
+        ></span>
+      </div>
+    </header>
+    <main id="main">
+      <div class="state" id="state">
+        <div class="spin"></div>
+        Loading your account…
+      </div>
+    </main>
+    <footer>
+      Account page powered by <a href="https://goinvora.com">Invora</a> —
+      invoices made effortless.
+    </footer>
+
+    <script>
+      (() => {
+        const FUNCTIONS_BASE =
+          "https://ojerckbyvevgaihlhwab.functions.supabase.co";
+        const token = new URLSearchParams(location.search).get("token") || "";
+        const main = document.getElementById("main");
+
+        // All values come from the business owner's data: always escape.
+        const esc = (s) =>
+          String(s ?? "").replace(
+            /[&<>"']/g,
+            (c) =>
+              ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;",
+              })[c],
+          );
+        const safeUrl = (u) => (/^https?:\/\//i.test(u || "") ? u : null);
+        const money = (v, cur) => {
+          try {
+            return new Intl.NumberFormat(undefined, {
+              style: "currency",
+              currency: cur || "USD",
+            }).format(v || 0);
+          } catch {
+            return `${(v || 0).toFixed(2)} ${cur || ""}`;
+          }
+        };
+        const date = (iso) => {
+          if (!iso) return "";
+          const d = new Date(iso + "T00:00:00");
+          return isNaN(d)
+            ? iso
+            : d.toLocaleDateString(undefined, {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              });
+        };
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const overdue = (i) =>
+          i.balanceDue > 0.004 &&
+          i.dueDate &&
+          new Date(i.dueDate + "T00:00:00") < today;
+        const badge = (i) => {
+          if (i.balanceDue <= 0.004 || i.status === "paid")
+            return '<span class="badge b-paid">Paid</span>';
+          if (overdue(i)) return '<span class="badge b-over">Overdue</span>';
+          if (i.status === "partiallyPaid")
+            return '<span class="badge b-part">Part paid</span>';
+          return '<span class="badge b-due">Due</span>';
+        };
+        function fail(title, msg) {
+          main.innerHTML = `<div class="state"><h1>${esc(title)}</h1>${esc(msg)}</div>`;
+        }
+
+        // Sum per currency: invoices can be in different currencies.
+        function sums(list, pick) {
+          const m = new Map();
+          for (const i of list)
+            m.set(i.currency, (m.get(i.currency) || 0) + pick(i));
+          return [...m.entries()].filter(([, v]) => v > 0.004);
+        }
+        const fmtSums = (arr) =>
+          arr.length
+            ? arr.map(([c, v]) => money(v, c)).join(" + ")
+            : money(0, "USD");
+
+        function render(d) {
+          const biz = d.business || {},
+            client = d.client || {};
+          const invoices = Array.isArray(d.invoices) ? d.invoices : [];
+          document.title = `${biz.name || "Your account"} · Invora`;
+          if (d.updatedAt) {
+            const u = new Date(d.updatedAt);
+            if (!isNaN(u))
+              document.getElementById("updated").textContent =
+                "Updated " +
+                u.toLocaleString(undefined, {
+                  day: "numeric",
+                  month: "short",
+                  hour: "numeric",
+                  minute: "2-digit",
+                });
+          }
+          const open = invoices.filter((i) => i.balanceDue > 0.004);
+          const late = open.filter(overdue);
+          const yearAgo = new Date(today);
+          yearAgo.setFullYear(yearAgo.getFullYear() - 1);
+          const recent = invoices.filter(
+            (i) => new Date(i.issueDate + "T00:00:00") >= yearAgo,
+          );
+          const due = sums(open, (i) => i.balanceDue);
+          const pay = safeUrl(biz.payLink);
+
+          let html = `
+      <section class="hello">
+        <div class="from">${esc(biz.name || "Your supplier")}</div>
+        <h1>Account for ${esc(client.name || "you")}</h1>
+        <p>Every invoice we've sent you, what's paid and what's still due.</p>
+      </section>
+      <section class="cards">
+        <div class="card due"><div class="k">Outstanding</div><div class="v">${esc(fmtSums(due))}</div>
+          <div class="s">${open.length} open invoice${open.length === 1 ? "" : "s"}</div></div>
+        <div class="card over"><div class="k">Overdue</div><div class="v">${esc(fmtSums(sums(late, (i) => i.balanceDue)))}</div>
+          <div class="s">${late.length} past due date</div></div>
+        <div class="card"><div class="k">Billed · last 12 months</div><div class="v">${esc(fmtSums(sums(recent, (i) => i.total)))}</div>
+          <div class="s">${recent.length} invoice${recent.length === 1 ? "" : "s"}</div></div>
+      </section>`;
+          if (pay && open.length) {
+            html += `<section class="payrow"><p>Settle your balance of <b>${esc(fmtSums(due))}</b> online.</p>
+        <a class="btn pay" href="${esc(pay)}" target="_blank" rel="noopener">Pay now</a></section>`;
+          }
+          html += `<h2>Invoices</h2>
+      <div class="filters">
+        <button class="chip on" data-f="all">All (${invoices.length})</button>
+        <button class="chip" data-f="open">Unpaid (${open.length})</button>
+        <button class="chip" data-f="paid">Paid (${invoices.length - open.length})</button>
+      </div>
+      <div class="list" id="list"></div>`;
+          const contact = [
+            biz.email &&
+              `<a href="mailto:${esc(biz.email)}">${esc(biz.email)}</a>`,
+            biz.phone &&
+              `<a href="tel:${esc(biz.phone)}">${esc(biz.phone)}</a>`,
+          ].filter(Boolean);
+          if (contact.length)
+            html += `<p class="contact">Questions? Contact ${esc(biz.name || "us")}: ${contact.join(" · ")}</p>`;
+          main.innerHTML = html;
+
+          const list = document.getElementById("list");
+          function show(filter) {
+            const rows = invoices.filter(
+              (i) =>
+                filter === "all" ||
+                (filter === "open"
+                  ? i.balanceDue > 0.004
+                  : i.balanceDue <= 0.004),
+            );
+            if (!rows.length) {
+              list.innerHTML = '<div class="empty">Nothing here.</div>';
+              return;
+            }
+            list.innerHTML = rows
+              .map((i) => {
+                const owes = i.balanceDue > 0.004;
+                const acts = [
+                  i.link
+                    ? `<a class="btn" href="view.html?token=${encodeURIComponent(i.link)}" target="_blank" rel="noopener">View invoice</a>`
+                    : "",
+                  owes && pay
+                    ? `<a class="btn pay" href="${esc(pay)}" target="_blank" rel="noopener">Pay</a>`
+                    : "",
+                ]
+                  .filter(Boolean)
+                  .join("");
+                return `<div class="row">
+          <div><div class="num">${esc(i.number)}${badge(i)}</div>
+            <div class="meta">Issued ${esc(date(i.issueDate))}${i.dueDate ? " · Due " + esc(date(i.dueDate)) : ""}</div></div>
+          <div class="amt">${esc(money(owes ? i.balanceDue : i.total, i.currency))}
+            <small>${owes ? (i.balanceDue < i.total ? "due of " + esc(money(i.total, i.currency)) : "due") : "paid"}</small></div>
+          ${acts ? `<div class="acts">${acts}</div>` : ""}
+        </div>`;
+              })
+              .join("");
+          }
+          document.querySelectorAll(".chip").forEach((c) =>
+            c.addEventListener("click", () => {
+              document
+                .querySelectorAll(".chip")
+                .forEach((x) => x.classList.toggle("on", x === c));
+              show(c.dataset.f);
+            }),
+          );
+          show("all");
+        }
+
+        if (!/^[0-9a-f-]{36}$/i.test(token)) {
+          fail(
+            "Link incomplete",
+            "This account link is missing or damaged. Ask the sender to share it again.",
+          );
+          return;
+        }
+        fetch(
+          `${FUNCTIONS_BASE}/view-portal?token=${encodeURIComponent(token)}`,
+        )
+          .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+          .then(render)
+          .catch(() =>
+            fail(
+              "This account link is no longer available",
+              "It may have been turned off by the sender. Please contact them for a new link.",
+            ),
+          );
+      })();
+    </script>
+  </body>
+</html>
